@@ -1,19 +1,32 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import { YellowBox } from 'react-native';
+import Home from './src/screens/Home';
+import ResultDetailsScreen from './src/screens/ResultDetailScreen';
 
-export default function App() {
+const Stack = createStackNavigator();
+YellowBox.ignoreWarnings(['Remote debugger']);
+
+function MainStack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen
+          name="ResultDetails"
+          component={ResultDetailsScreen}
+          options={{title: 'Details'}}
+        />
+        {/*<Stack.Screen name="Profile" component={Profile} />*/}
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default MainStack;
